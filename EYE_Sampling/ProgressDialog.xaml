@@ -1,0 +1,32 @@
+﻿<Window x:Class="EYE_Sampling.ProgressDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Processing..."
+        Width="400"
+        Height="122"
+        WindowStartupLocation="CenterOwner"
+        AllowsTransparency="True"
+        Opacity="1"
+        WindowStyle="None"
+        ShowInTaskbar="False">
+  
+  <Border CornerRadius="12,12,12,12"
+          BorderThickness="0,0,0,0"
+          Height="Auto" Background="#FFDEECF9" BorderBrush="#FFB2B2B2">
+        <Grid>
+      <ProgressBar Margin="10,0,10,38"
+                   x:Name="progressBar"
+                   Foreground="#FF89A8EA"
+                   VerticalAlignment="Bottom"
+                   Height="25" />
+            <TextBlock Margin="10,8,10,0"
+                 Text="A background operation is in progress. Please wait..."
+                 x:Name="txtDialogMessage"
+                 VerticalAlignment="Top"
+                 Height="Auto"
+                 Foreground="#FF080707"
+                 FontSize="14"
+                 TextWrapping="Wrap" />
+        </Grid>
+  </Border>
+</Window>

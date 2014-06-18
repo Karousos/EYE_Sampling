@@ -1,0 +1,327 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Name="Window_Main" mc:Ignorable="d" x:Class="EYE_Sampling.MainWindow"
+    Title="ΕΥΕ Sampling" Height="708" Width="1087" Loaded="Window_Loaded_1"
+    WindowStartupLocation="CenterScreen" MinHeight="535">
+    <Grid>
+        <TabControl TabStripPlacement="Left" Background="{x:Null}" BorderThickness="0,0,0,0" >
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid>
+                                    <Border x:Name="Border" Margin="0,0,0,0" Background="Transparent" BorderBrush="Black" >
+                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
+											HorizontalAlignment="Center"
+											ContentSource="Header" Margin="12,2,12,2"
+											RecognizesAccessKey="True"/>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<Image Height="18" Source="." />-->
+                                        <TextBlock Text="" Margin="2,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                        <Setter Property="HeaderTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Panel.ZIndex" Value="100" />
+                                        <Setter TargetName="Border" Property="BorderThickness" Value="2,2,2,2"/>
+                                        <Setter TargetName="Border" Property="BorderBrush" Value="Gainsboro" />
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <TabControl.BitmapEffect>
+                <DropShadowBitmapEffect Color="Navy" Opacity="0.3"/>
+            </TabControl.BitmapEffect>
+
+            <TabItem Header="Δεδομένα Εισόδου" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="140" Height="30" >
+                <Grid Background="White">
+                    <DataGrid x:Name="DG_Items" Margin="10,84,10,10" Background="White" ItemsSource="{Binding Data}" AutoGenerateColumns="True"  IsReadOnly="True" IsManipulationEnabled="True"/>
+                    <Label Content="Νέα δεδομένα εισόδου" VerticalAlignment="Top" FontStyle="Italic" Width="360" Margin="10,10,559,0"/>
+                    <Label Content="Επιλέξτε αρχείο εισόδου xlsx για την εισαγωγή νέων έργων." VerticalAlignment="Top" Margin="0,19,441,0" HorizontalAlignment="Right" Width="330"/>
+                    <Button Height="32"  x:Name="BT_Mappings" VerticalAlignment="Top" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Margin="0,16,366,0" HorizontalAlignment="Right" Width="38" Click="BT_Mappings_Click">
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Image Source="images/mappings.jpg"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Content="Φόρτωμα Προγραμμάτων" Height="32"  x:Name="BT_FileImport" 
+                    	VerticalAlignment="Top" Click="BT_FileImport_Click" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Margin="0,16,209,0" HorizontalAlignment="Right" Width="152"/>
+                    <Button Height="32"  x:Name="BT_Mappings_Check" VerticalAlignment="Top" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Margin="0,16,128,0" HorizontalAlignment="Right" Width="38" Click="BT_Mappings_Check_Click">
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Image Source="images/mappings.jpg"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Content="Φόρτωμα Ελέγχων" Height="32"  x:Name="BT_FileImport_Checks" 
+                    	VerticalAlignment="Top" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Margin="0,16,10,0" HorizontalAlignment="Right" Width="113" IsEnabled="False" Click="BT_FileImport_Checks_Click"/>
+                    <Label Content="Συνολικός Πληθυσμός:" VerticalAlignment="Top" Margin="10,53,0,0" FontStyle="Italic" HorizontalAlignment="Left" Width="137"/>
+                    <Label x:Name="LB_total_items" VerticalAlignment="Top" Margin="140,53,0,0" FontStyle="Italic" HorizontalAlignment="Left" Width="46" FontWeight="Bold" Content="0" />
+                    <Label Content="MIS Project:" VerticalAlignment="Top" Margin="180,53,0,0" FontStyle="Italic" HorizontalAlignment="Left" Width="70"/>
+                    <TextBox x:Name="TB_MIS" Height="23" Margin="250,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Width="89" TextChanged="TB_MIS_TextChanged"/>
+                    <Label Content="Τίτλος Project:" VerticalAlignment="Top" Margin="343,53,0,0" FontStyle="Italic" HorizontalAlignment="Left" Width="86"/>
+                    <TextBox x:Name="TB_Title" Height="23" Margin="428,53,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" TextChanged="TB_Title_TextChanged"/>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ρυθμίσεις" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="140" Height="30">
+                <Grid Background="White" Margin="0,0,0,6">
+                    <Label Content="Ζητούμενο πλήθος δειγμάτων:" HorizontalAlignment="Left" Margin="43,11,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TB_Percent" HorizontalAlignment="Left" Height="23" Margin="219,14,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="41" BorderThickness="1,1,1,1"
+            			Background="Transparent" Foreground="Navy" FontWeight="Bold" LostFocus="TB_Percent_LostFocus"/>
+                    <Label Content="% ή" HorizontalAlignment="Left" Margin="259,11,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="TB_NumOfSamples" HorizontalAlignment="Left" Height="23" Margin="287,14,0,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top" Width="37" BorderThickness="1,1,1,1"
+                    	Background="Transparent" Foreground="Navy" FontWeight="Bold" Loaded="TB_NumOfSamples_Loaded" LostFocus="TB_NumOfSamples_LostFocus" TextChanged="TB_NumOfSamples_TextChanged"/>
+                    <Label Content="δείγματα." HorizontalAlignment="Left" Margin="329,11,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ρυθμίσεις Συμμετοχής" HorizontalAlignment="Left" Margin="43,46,0,0" VerticalAlignment="Top" Foreground="#FFB4A8A8"/>
+                    <Label Content="Συνολικός πληθυσμός:" HorizontalAlignment="Right" Margin="0,41,88,0" VerticalAlignment="Top" Width="134" HorizontalContentAlignment="Right"/>
+                    <Label x:Name="LB_Participation_Total" Content="0" HorizontalAlignment="Right" Margin="0,41,51,0" VerticalAlignment="Top" Width="37" HorizontalContentAlignment="Left" FontWeight="Bold"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="47,77,51,0" Height="280" VerticalAlignment="Top">
+                        <Grid Margin="9" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="91*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox x:Name="CB_Praxi" Content="Να συμμετέχουν τα projects που υλοποιούνται στις εξής πράξεις:" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Checked="CB_Praxi_Checked" Unchecked="CB_Praxi_Unchecked" />
+                            <Button Content="..." Height="26"  x:Name="BT_Praxi" 
+                            	VerticalAlignment="Top" BorderThickness="0,0,0,0"
+                            	Background="Transparent" Margin="391,5,0,0" HorizontalAlignment="Left" Width="24" IsEnabled="False" Click="BT_Praxi_Click"/>
+                            <Label x:Name="LB_Praxeis" Content="" VerticalAlignment="Top" Margin="419,5,10,0"/>
+                            <CheckBox x:Name="CB_Region" Content="Να συμμετέχουν τα projects που υλοποιούνται στις εξής περιοχές:" HorizontalAlignment="Left" Margin="11,44,0,0" VerticalAlignment="Top" Checked="CB_Region_Checked" Unchecked="CB_Region_Unchecked" />
+                            <Button Content="..." Height="26"  x:Name="BT_Region" 
+                    			VerticalAlignment="Top" BorderThickness="0,0,0,0"
+                    			Background="Transparent" Margin="391,39,0,0" HorizontalAlignment="Left" Width="24" Click="BT_Region_Click" IsEnabled="False"/>
+                            <CheckBox x:Name="CB_Date" Content="Να είναι σε εξέλιξη το χρονικό διάστημα:" HorizontalAlignment="Left" Margin="11,77,0,0" VerticalAlignment="Top" Checked="CB_Date_Checked" Unchecked="CB_Date_Unchecked"/>
+                            <DatePicker x:Name="DP_Start" Margin="254,73,0,0" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106" IsEnabled="False" SelectedDateChanged="DP_Start_SelectedDateChanged"/>
+                            <Label Content="έως" HorizontalAlignment="Left" VerticalAlignment="Top" Width="31" Margin="365,72,0,0"/>
+                            <DatePicker x:Name="DP_Stop" Margin="401,71,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="106" IsEnabled="False" SelectedDateChanged="DP_Stop_SelectedDateChanged"/>
+                            <CheckBox x:Name="CB_Money" Content="Ο προυπολογισμός τους να είναι από:" HorizontalAlignment="Left" Margin="11,110,0,0" VerticalAlignment="Top" Unchecked="CB_Money_Unchecked" Checked="CB_Money_Checked"/>
+                            <TextBox x:Name="TB_Money_From" HorizontalAlignment="Left" Height="23" Margin="240,108,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="65" BorderThickness="1,1,1,1"
+                    			Background="Transparent" Foreground="Navy" FontWeight="Bold" IsEnabled="False" LostFocus="TB_Money_From_LostFocus"/>
+                            <Label Content="έως" HorizontalAlignment="Left" VerticalAlignment="Top" Width="33" Margin="308,105,0,0"/>
+                            <TextBox x:Name="TB_Money_To" HorizontalAlignment="Left" Height="23" Margin="346,108,0,0" TextWrapping="Wrap" Text="50000" VerticalAlignment="Top" Width="87" BorderThickness="1,1,1,1"
+                            	Background="Transparent" Foreground="Navy" FontWeight="Bold" IsEnabled="False" LostFocus="TB_Money_To_LostFocus"/>
+                            <Label Content="ευρώ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="41" Margin="433,108,0,0"/>
+                            <CheckBox x:Name="CB_Theoritical" Content="Να αφορούν μόνο σε :" HorizontalAlignment="Left" Margin="11,141,0,0" VerticalAlignment="Top" Checked="CB_Theoritical_CheckEvent" Unchecked="CB_Theoritical_CheckEvent"/>
+                            <ComboBox x:Name="Combo_Theoritical" HorizontalAlignment="Left" Margin="154,138,0,0" VerticalAlignment="Top" Width="158" BorderThickness="0,0,0,0" 
+                            	Background="Transparent" Foreground="Navy" SelectedIndex="0" SelectionChanged="Combo_Theoritical_SelectionChanged" IsEnabled="False">
+                                <ComboBoxItem Content="Θεωρητική Κατάρτιση"/>
+                                <ComboBoxItem Content="Πρακτική Άσκηση"/>
+                            </ComboBox>
+                            <CheckBox x:Name="CB_Students" Content="Ο αριθμός των ασκούμενων στην επιχείρηση  πρακτικής που θα ελεγχθεί να είναι  μεγαλύτερος του:" HorizontalAlignment="Left" Margin="11,172,0,0" VerticalAlignment="Top" Checked="CB_Students_Checked" Unchecked="CB_Students_Unchecked"/>
+                            <TextBox x:Name="TB_Students" HorizontalAlignment="Left" Height="25" Margin="587,169,0,0" TextWrapping="Wrap" Text="20" VerticalAlignment="Top" Width="35" BorderThickness="1,1,1,1"
+                            	Background="Transparent" Foreground="Navy" FontWeight="Bold" IsEnabled="False" LostFocus="TB_Students_LostFocus" />
+                            <CheckBox x:Name="CB_Theoritical_Copy" Content="Τύπος φορέα/παρόχου:" HorizontalAlignment="Left" Margin="11,200,0,0" VerticalAlignment="Top" Checked="CB_Theoritical_CheckEvent" Unchecked="CB_Theoritical_CheckEvent" IsEnabled="False"/>
+                            <ComboBox x:Name="Combo_Theoritical_Copy" HorizontalAlignment="Left" Margin="161,197,0,0" VerticalAlignment="Top" Width="158" BorderThickness="0,0,0,0" 
+                            	Background="Transparent" Foreground="Navy" SelectedIndex="0" SelectionChanged="Combo_Theoritical_SelectionChanged" IsEnabled="False">
+                                <ComboBoxItem Content="Δήμος"/>
+                                <ComboBoxItem Content="Επιχείρηση"/>
+                            </ComboBox>
+                            <CheckBox x:Name="CB_Anadoxoi" Content="Να μή συμμετέχουν ανάδοχοι που έχουν ελεγχθεί τουλάχιστον:" HorizontalAlignment="Left" Margin="11,228,0,0" VerticalAlignment="Top" Height="16" Width="368" Checked="CB_Anadoxoi_Checked" Unchecked="CB_Anadoxoi_Unchecked"/>
+                            <TextBox x:Name="TB_Anadoxoi" HorizontalAlignment="Left" Height="23" Margin="388,227,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="30" BorderThickness="1,1,1,1"
+                            	Background="Transparent" Foreground="Navy" FontWeight="Bold" LostFocus="TB_Anadoxoi_LostFocus" />
+                            <Label x:Name="LB_v1a_Copy2" Content="φορές." HorizontalAlignment="Left" Margin="419,224,0,0" VerticalAlignment="Top" IsEnabled="False" Height="26" Width="46"/>
+                        </Grid>
+                    </Border>
+                    <Label Content="Εναπομείνας Πληθυσμός:" HorizontalAlignment="Right" Margin="0,357,88,0" VerticalAlignment="Top" Width="207" HorizontalContentAlignment="Right"/>
+                    <Label x:Name="LB_Participation_Rest" Content="0" HorizontalAlignment="Right" Margin="0,357,51,0" VerticalAlignment="Top" Width="37" HorizontalContentAlignment="Left" FontWeight="Bold"/>
+                    <Label Content="Ρυθμίσεις Υποχρεωτικής Επιλογής" HorizontalAlignment="Left" Margin="47,401,0,0" VerticalAlignment="Top" Foreground="#FFB4A8A8"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="90" VerticalAlignment="Top" Margin="47,432,51,0">
+                        <Grid Margin="9" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="59*"/>
+                                <ColumnDefinition Width="454*"/>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox x:Name="CB_Yp_Anadoxoi" Content="Να επιλεγούν ανάδοχοι που έχουν ελεγχθεί λιγότερο από " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="16" Width="334" Checked="CB_Yp_Anadoxoi_Checked" Unchecked="CB_Yp_Anadoxoi_Unchecked"/>
+                            <TextBox x:Name="TB_Yp_Anadoxoi" HorizontalAlignment="Left" Height="23" Margin="260,8,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="30" BorderThickness="1,1,1,1"
+                            	Background="Transparent" Foreground="Navy" FontWeight="Bold" Grid.Column="1" LostFocus="TB_Yp_Anadoxoi_LostFocus" />
+                            <Label x:Name="LB_v1a_Copy" Content="φορές." HorizontalAlignment="Left" Margin="291,5,0,0" VerticalAlignment="Top" IsEnabled="False" Grid.Column="1" Height="26" Width="46"/>
+                            <CheckBox x:Name="CB_Yp_Poines" Content="Να επιλεγούν ανάδοχοι που έχουν επιβληθεί ποινές πάνω από " HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="16" Width="362" Checked="CB_Yp_Poines_Checked" Unchecked="CB_Yp_Poines_Unchecked"/>
+                            <TextBox x:Name="TB_Yp_Poines" HorizontalAlignment="Left" Height="23" Margin="286,44,0,0" TextWrapping="Wrap" Text="50000" VerticalAlignment="Top" Width="76" BorderThickness="1,1,1,1"
+                            	Background="Transparent" Foreground="Navy" FontWeight="Bold"  Grid.Column="1" LostFocus="TB_Yp_Poines_LostFocus" />
+                            <Label x:Name="LB_v1a_Copy1" Content="ευρώ." HorizontalAlignment="Left" Margin="367,42,0,0" VerticalAlignment="Top" IsEnabled="False" Grid.Column="1" Height="26" Width="46"/>
+                        </Grid>
+                    </Border>
+                    <Label Content="Τύπος δειγματοληψίας" HorizontalAlignment="Left" Margin="47,568,0,0" VerticalAlignment="Top" Foreground="#FFB4A8A8"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Height="55" VerticalAlignment="Top" Margin="47,594,51,0">
+                        <Grid Margin="9" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="59*"/>
+                                <ColumnDefinition Width="454*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label x:Name="LB_v2a1" Content="" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" IsEnabled="False" Grid.ColumnSpan="2" Height="26" Width="212"/>
+                            <RadioButton x:Name="RB_Random" Content="Τυχαία" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="74" IsChecked="True" GroupName="GRB_Type" Checked="RB_Random_Checked"/>
+                            <RadioButton x:Name="RB_MUS" Content="Με βαρύτητα προυπολογισμού" HorizontalAlignment="Left" Margin="46,10,0,0" VerticalAlignment="Top" Width="317" Grid.Column="1" GroupName="GRB_Type" Checked="RB_MUS_Checked"/>
+                        </Grid>
+                    </Border>
+                    <Label Content="Εναπομείνας Πληθυσμός:" HorizontalAlignment="Right" Margin="0,527,88,0" VerticalAlignment="Top" Width="153" HorizontalContentAlignment="Right"/>
+                    <Label x:Name="LB_Selection_Rest" Content="0" HorizontalAlignment="Right" Margin="0,527,51,0" VerticalAlignment="Top" Width="37" HorizontalContentAlignment="Left" FontWeight="Bold"/>
+                    <Label Content="Επιλεγμένα Έργα:" HorizontalAlignment="Right" Margin="0,527,281,0" VerticalAlignment="Top" Width="153" HorizontalContentAlignment="Right"/>
+                    <Label x:Name="LB_Selection" Content="0" HorizontalAlignment="Right" Margin="0,527,244,0" VerticalAlignment="Top" Width="37" HorizontalContentAlignment="Left" FontWeight="Bold"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Δειγματοληψία" HorizontalAlignment="Left" Margin="0" Width="140" Height="30" VerticalAlignment="Top" >
+                <Grid Background="White">
+                    <Label Content="Σύνολο προγραμμάτων για δειγματοληψία:" HorizontalAlignment="Left" Margin="9,34,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LB_Sampling_ForSampling" Content="" HorizontalAlignment="Left" Margin="254,34,0,0" VerticalAlignment="Top" Width="67" Foreground="#FF738AE8" FontWeight="Bold"/>
+                    <Label Content="Ζητούμενα δείγματα από δειγματοληψία:" HorizontalAlignment="Left" Margin="385,34,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LB_NumOfRestSamples" Content="" HorizontalAlignment="Left" Margin="619,34,0,0" VerticalAlignment="Top" Width="46" Foreground="#FF738AE8" FontWeight="Bold"/>
+                    <Button x:Name="BT_LoadProjects" Margin="0,28,11,0" HorizontalAlignment="Right" Width="177" BorderThickness="0,0,0,0"
+            			Background="Transparent" Foreground="Navy" Click="BT_LoadProjects_Click"  Height="32"  VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Label Padding="3" Content="Φόρτωση προγραμμάτων" VerticalAlignment="Center"/>
+                            <Image Source="images/refresh.jpg"/>
+                        </StackPanel>
+                    </Button>
+                    <DataGrid x:Name="DG_Input_Projects" Margin="9,65,11,0" Background="White" AutoGenerateColumns="True" Height="180" VerticalAlignment="Top" />
+                    <Button Content="Έναρξη Δειγματοληψίας" Height="32"  x:Name="BT_Start" 
+                    	VerticalAlignment="Top" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Margin="10,250,0,0" HorizontalAlignment="Left" Width="148" Click="BT_Start_Click" BorderBrush="#FFD8D8D8"/>
+                    <DataGrid x:Name="DG_Output_Projects" Margin="10,287,10,45" Background="White" AutoGenerateColumns="True" LoadingRow="DG_Output_Projects_LoadingRow" />
+                    <Button x:Name="BT_Original" Margin="0,0,534,8" HorizontalAlignment="Right" Width="155" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom" Click="BT_Original_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Label Padding="3" Content="Αρχικός πληθυσμός"/>
+                            <Image Source="images/excelicon.png"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BT_Sampling" Margin="0,0,315,8" HorizontalAlignment="Right" Width="214" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom" Click="BT_Sampling_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Label Padding="3" Content="Πληθυσμός προς δειγματοληψία"/>
+                            <Image Source="images/excelicon.png"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BT_Output" Margin="0,0,168,8" HorizontalAlignment="Right" Width="142" BorderThickness="0,0,0,0"
+            			Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom" Click="BT_Output_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Label Padding="3" Content="Επιλεγμένα Έργα"/>
+                            <Image Source="images/excelicon.png"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BT_Report" Margin="0,0,11,8" HorizontalAlignment="Right" Width="152" BorderThickness="0,0,0,0"
+            			Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom" Click="BT_Report_Click" >
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Label Padding="3" Content="Αναφορά"/>
+                            <Image Source="images/doc.png"/>
+                        </StackPanel>
+                    </Button>
+                    <Label x:Name="LB_Green" Content="Πράσινα: Επιλεγμένα λόγω ρυθμίσεων" HorizontalAlignment="Left" Margin="279,256,0,0" VerticalAlignment="Top" Width="224" Foreground="Green" Visibility="Hidden"/>
+                    <Label x:Name="LB_Blue" Content="Μπλε: Επιλεγμένα από δειγματοληψία" HorizontalAlignment="Left" Margin="523,256,0,0" VerticalAlignment="Top" Width="224" Foreground="Blue" Visibility="Hidden"/>
+                    <CheckBox x:Name="CB_Test" Content="(Δοκιμαστική)" HorizontalAlignment="Left" Margin="163,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.853,1.125" Width="178" Checked="CB_Test_Checked" Unloaded="CB_Test_Unloaded" Unchecked="CB_Test_Unchecked"/>
+                    <Label Content="Συνολικός Πληθυσμός:" HorizontalAlignment="Left" Margin="9,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LB_Sampling_All" Content="" HorizontalAlignment="Left" Margin="141,10,0,0" VerticalAlignment="Top" Width="52" Foreground="#FF738AE8" FontWeight="Bold"/>
+                    <Label Content="Ζητούμενα δείγματα:" HorizontalAlignment="Left" Margin="203,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LB_Sampling_Asked" Content="" HorizontalAlignment="Left" Margin="321,10,0,0" VerticalAlignment="Top" Width="42" Foreground="#FF738AE8" FontWeight="Bold"/>
+                    <Label Content="Επιλεγμένα δείγματα:" HorizontalAlignment="Left" Margin="384,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="LB_Sampling_Selected" Content="" HorizontalAlignment="Left" Margin="509,10,0,0" VerticalAlignment="Top" Width="46" Foreground="#FF738AE8" FontWeight="Bold"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Αναφορές" HorizontalAlignment="Left" Margin="0,-3,0,0" VerticalAlignment="Top" Width="140" Height="30">
+                <Grid Background="White">
+                    <ListView x:Name="LV_History" Margin="0,34,0,51" BorderBrush="Black" Loaded="LV_History_Loaded" VirtualizingStackPanel.IsVirtualizing="True"
+VirtualizingStackPanel.VirtualizationMode="Recycling"
+ScrollViewer.IsDeferredScrollingEnabled="True">                                                
+                        <ListView.View>
+                            <GridView >
+                                <GridViewColumn Width="160" Header="Project" DisplayMemberBinding="{Binding ProjectTitle}" />
+                                <GridViewColumn Width="160" Header="Ημερομηνία" DisplayMemberBinding="{Binding ProjectDateTime}" />
+                                <GridViewColumn Header="" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="OpenFileInput" CommandParameter="{Binding}" Margin="5,0,0,0" HorizontalAlignment="Right" Width="162" BorderThickness="0,0,0,0"
+                                	    Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom">
+                                                <StackPanel Orientation="Horizontal" Margin="0">
+                                                    <Label Padding="3" Content="Αρχείο Συμμετεχόντων"/>
+                                                    <Image Source="images/excelicon.png"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="OpenFileOutput" CommandParameter="{Binding}" Margin="5,0,0,0" HorizontalAlignment="Right" Width="162" BorderThickness="0,0,0,0"
+                                	    Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom">
+                                                <StackPanel Orientation="Horizontal" Margin="0">
+                                                    <Label Padding="3" Content="Αρχείο Επιλεγμένων"/>
+                                                    <Image Source="images/excelicon.png"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="OpenFileReport" CommandParameter="{Binding}" Margin="5,0,0,0" HorizontalAlignment="Right" Width="162" BorderThickness="0,0,0,0"
+                                	    Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom">
+                                                <StackPanel Orientation="Horizontal" Margin="0">
+                                                    <Label Padding="3" Content="Αναφορά δειγμα/ψίας"/>
+                                                    <Image Source="images/doc.png"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    
+                    <Label Content="Ιστορικό Δειγματοληψιών" Margin="0,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150"/>
+                    <Button Margin="0,0,10,10" HorizontalAlignment="Right" BorderThickness="0,0,0,0"
+                    	Background="Transparent" Foreground="Navy" Height="32" VerticalAlignment="Bottom" IsEnabled="False" >
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <Label Padding="3" Content="Αναλυτικό αρχείο κινήσεων Συστήματος"/>
+                            <Image Source="images/txt_file.png"/>
+                        </StackPanel>
+                    </Button>
+      
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Περί.." HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Width="140" Height="30">
+                <Grid Background="White">
+                    <Border BorderThickness="1,1,1,1" BorderBrush="Gainsboro" Margin="209,173,0,0" HorizontalAlignment="Left" Width="537" Height="211" VerticalAlignment="Top" >
+                        <Grid Margin="9" Background="Transparent">
+                            <Label Content="EYE Sampling V1.02" HorizontalAlignment="Left" Margin="268,10,0,0" VerticalAlignment="Top" Foreground="#FF152DC3" FontWeight="Bold"/>
+                            <Label Content="16-3-2014" HorizontalAlignment="Left" Margin="298,36,0,0" VerticalAlignment="Top" Foreground="#FF152DC3" Padding="0,0,0,0"/>
+                            <Label Content="Developed by" Margin="268,62,42,0" Padding="0,0,0,0" Height="17" VerticalAlignment="Top"/>
+                            <Label Content="Nikos Karousos" Margin="268,77,0,0" Foreground="#FF152DC3" Padding="0,0,0,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
+                            <Label Content="karousos@gmail.com" Margin="288,93,0,0" Foreground="#FFA7AAB9" FontSize="10" Padding="0,0,0,0" Height="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="104"/>
+                            <Label Content="Consulted by" Margin="268,116,0,0" Padding="0,0,0,0" Height="17" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
+                            <Label Content="Nikos Karacapilidis" Margin="268,130,0,0" Foreground="#FF152DC3" Padding="0,0,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115"/>
+                            <Label Content="nikos@mech.upatras.gr" Margin="280,147,0,0" Foreground="#FFA7AAB9" FontSize="10" Padding="0,0,0,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" Width="112"/>
+                            <DockPanel LastChildFill="False" Margin="1,5,2,1" OpacityMask="Black" >
+                                <Image Height="171" VerticalAlignment="Top" Width="215" Source="images/target.jpg"/>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+             </TabItem>
+
+        </TabControl>
+        <Label Content="Καλωσήρθες" Margin="10,0,0,36" Foreground="#FFA29C9C" HorizontalAlignment="Left" Width="126" Height="37" VerticalAlignment="Bottom"/>
+        <Label x:Name="LB_User" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" Width="126" Foreground="#FF152DC3" HorizontalContentAlignment="Right" Height="36" VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>

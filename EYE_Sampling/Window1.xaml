@@ -1,0 +1,78 @@
+﻿<Window x:Class="Evolve.Wpf.Samples.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Window1" Height="318" Width="733">
+  <Window.Background>
+    <LinearGradientBrush                     StartPoint="0.5,0"
+                                             EndPoint="0.5,1">
+      <GradientStop Color="#FF7B7E80"
+                    Offset="0" />
+      <GradientStop Color="#FF424548"
+                    Offset="1" />
+    </LinearGradientBrush>
+  </Window.Background>
+  <Grid>
+    <Button Margin="26,0,0,107"
+            Name="btnShowWithCancelButton"
+            HorizontalAlignment="Left"
+            Width="174"
+            Click="btnShowWithCancelButton_Click"
+            Height="23"
+            VerticalAlignment="Bottom">Show with Cancel button</Button>
+    <Button HorizontalAlignment="Left"
+            Margin="26,0,0,74"
+            Name="btnShowWithoutCancelButton"
+            Width="174"
+            Height="23"
+            VerticalAlignment="Bottom"
+            Click="btnShowWithoutCancelButton_Click">Show without Cancel button</Button>
+    <Button HorizontalAlignment="Left"
+            Margin="26,0,0,38"
+            Name="btnShowWithoutProgressBar"
+            Width="174"
+            Height="23"
+            VerticalAlignment="Bottom"
+            Click="btnShowWithoutProgressBar_Click">Exception on worker thread</Button>
+    <TextBox Height="26"
+             Margin="149,62,26,0"
+             Name="txtDialogTitle"
+             VerticalAlignment="Top">Running operations on a background thread just became easy :-).</TextBox>
+    <Label Height="28"
+           Margin="26,60,0,0"
+           Name="label1"
+           VerticalAlignment="Top"
+           HorizontalAlignment="Left"
+           Width="121">Main Text</Label>
+    <Label Height="28"
+           FontSize="14px"
+           HorizontalAlignment="Left"
+           Margin="26,12,0,0"
+           Name="label2"
+           VerticalAlignment="Top"
+           Width="190">WPF Progress Dialog Sample</Label>
+    <Label HorizontalAlignment="Left"
+           Margin="26,95,0,0"
+           Name="label3"
+           Width="101"
+           Height="28"
+           VerticalAlignment="Top">Reference Value</Label>
+    <TextBox Margin="149,97,0,0"
+             Name="txtStartValue"
+             Height="26"
+             VerticalAlignment="Top"
+             HorizontalAlignment="Left"
+             Width="51">25</TextBox>
+    <Label Height="28"
+           Margin="225,0,57,103.48"
+           Name="label4"
+           VerticalAlignment="Bottom">Increments the ref. value until user cancels.</Label>
+    <Label Height="28"
+           Margin="225,0,18,70.48"
+           Name="label5"
+           VerticalAlignment="Bottom">Increments the ref. value 100 times - progress indication is set manually.</Label>
+    <Label Height="28"
+           Margin="225,0,18,34.48"
+           Name="label6"
+           VerticalAlignment="Bottom">Generates an exception on the worker thread (available through Error property).</Label>
+  </Grid>
+</Window>

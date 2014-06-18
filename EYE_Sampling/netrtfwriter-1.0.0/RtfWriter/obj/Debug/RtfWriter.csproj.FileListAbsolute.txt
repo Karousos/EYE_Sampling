@@ -1,0 +1,5 @@
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\bin\Debug\RtfWriter.dll
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\bin\Debug\RtfWriter.pdb
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\obj\Debug\RtfWriter.csprojResolveAssemblyReference.cache
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\obj\Debug\RtfWriter.dll
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\obj\Debug\RtfWriter.pdb

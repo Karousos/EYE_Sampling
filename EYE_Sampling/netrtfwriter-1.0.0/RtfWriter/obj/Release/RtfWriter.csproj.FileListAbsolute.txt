@@ -1,0 +1,4 @@
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\bin\Release\RtfWriter.dll
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\bin\Release\RtfWriter.pdb
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\obj\Release\RtfWriter.dll
+C:\Users\nikos\Desktop\Sampling\EYE_Sampling\EYE_Sampling\netrtfwriter-1.0.0\RtfWriter\obj\Release\RtfWriter.pdb
